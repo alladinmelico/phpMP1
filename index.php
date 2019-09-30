@@ -122,7 +122,7 @@ while ($rowSlider =  mysqli_fetch_array($resultSlider)){
 $result = mysqli_query( $conn,"call viewAllFilms();" );
     while ($row = mysqli_fetch_array($result))
     {?>
-    <tr style="color:white;" ">
+    <tr style="color:white;">
       <td>
       <div class="container-fluid mx-auto " style="width: 40rem;margin-top:5rem;" >
         <div class="card mb-3 box shadow p-2 cardBg" style="max-width: 40rem; background-image: url('pictures/bg/5c289afb9a157510e6893a57_29. Pale Cornflower Blue.jpg');" >
