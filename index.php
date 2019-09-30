@@ -165,7 +165,7 @@ $result = mysqli_query( $conn,"call viewAllFilms();" );
     mysqli_close( $conn );
 ?>
 
-<div class="position-relative w-100 d-flex flex-column p-4">
+<!-- <div class="position-relative w-100 d-flex flex-column p-4">
     <div class="toast ml-auto" role="alert" data-delay="100" data-autohide="false">
         <div class="toast-header">
             <strong class="mr-auto text-primary">Toast</strong>
@@ -176,9 +176,10 @@ $result = mysqli_query( $conn,"call viewAllFilms();" );
         </div>
         <div class="toast-body">
             Hey, there! This is a Bootstrap 4 toast.
+            Fooo
         </div>
     </div>
-</div
+</div -->
 
 </body>
 </html>
