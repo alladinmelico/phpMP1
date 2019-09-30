@@ -133,7 +133,7 @@ $result = mysqli_query( $conn,"call viewAllFilms();" );
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title font-weight-bold text-center mb-5"><?php echo $row['strFilmTitle'] ?>
-                  <a href="script/viewFilm.php?lngFilmTitleID=<?php echo ($row['lngFilmTitleID']);?>&filmPic=<?php echo $row['picture']; ?>"
+                  <a href="script/simpleView.php?lngFilmTitleID=<?php echo ($row['lngFilmTitleID']);?>"
                      class="float-right "><img src="pictures\icons\arrow-pointing-right-in-a-circle.png" alt="" width=50 class="rounded-circle shadow p-2"></a></h5>
                 <p class="card-text"><strong>Cast: </strong><?php echo $row['actors']?></p>
                 <p class="card-text"><strong>Genre:</strong><?php echo $row['genre']?></p>
