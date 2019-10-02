@@ -137,7 +137,17 @@ $result = mysqli_query( $conn,"call viewAllFilms();" );
                      class="float-right "><img src="pictures\icons\arrow-pointing-right-in-a-circle.png" alt="" width=50 class="rounded-circle shadow p-2"></a></h5>
                 <p class="card-text"><strong>Cast: </strong><?php echo $row['actors']?></p>
                 <p class="card-text"><strong>Genre:</strong><?php echo $row['genre']?></p>
-                <p class="card-text"><strong>Producers:</strong><?php echo $row['producers']?></p>
+                  <?php
+                      $tempProds = explode("," ,$row['producers']);
+                      $tempProdUniq = array_unique($tempProds);
+                      $tempString = "";
+                        foreach($tempProdUniq AS $tempProdData)
+                        {
+                          $tempString .= (", ". $tempProdData);
+                        }
+                        $tempString = substr($tempString, 1);
+                   ?>
+                <p class="card-text"><strong>Producers:</strong><?php echo $tempString;?></p>
                 <strong><p><img src="pictures\icons\time.png" alt="" width=20em style="margin-right:0.6em;">
                   <?php echo intdiv($row['intFilmDuration'],60)?>hr 
                   <?php echo fmod($row['intFilmDuration'],60)?> mins</p></strong>

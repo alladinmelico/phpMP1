@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if(count($errors) === 0) {
             $file_name	 = $_FILES["photo"]["name"]; 
             $file_tmp_name = $_FILES["photo"]["tmp_name"];
-            $targetDir = "../pictures/poster";
+            $targetDir = "../pictures/profile";
             $targetFile = $targetDir.$_FILES['photo']['name'];
 
             if(move_uploaded_file($file_tmp_name, "$targetDir/$file_name")){
@@ -36,7 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $lngActorID = $_POST['lngActorID'];
             $name= $_POST['strActorFullName'];
             $memo = $_POST['memActorNotes'];
-
+            echo $file_name;
+            echo $targetDir;
             $sql = "UPDATE tblactors SET strActorFullName='$name',memActorNotes='$memo',picture='$file_name' WHERE lngActorID = $lngActorID;";
             echo $sql;
             $result = mysqli_query( $conn,$sql);

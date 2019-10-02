@@ -47,7 +47,17 @@ include('includes/navigation.php');?>
         <input type="hidden" name="search" value="">
         <td class="text-center"><?php echo $row['actors'];?></td>
         <td class="text-center"><?php echo $row['strFilmTitle'];?></td>
-        <td class="text-center"><?php echo $row['producers'];?></td>
+        <?php
+            $tempProds = explode("," ,$row['producers']);
+            $tempProdUniq = array_unique($tempProds);
+            $tempString = "";
+            foreach($tempProdUniq AS $tempProdData)
+            {
+                $tempString .= (", ". $tempProdData);
+            }
+            $tempString = substr($tempString, 1);
+        ?>
+        <td class="text-center"><?php echo $tempString;?></td>
         <td class="text-sm-left">
             <a href='viewFilm.php?filmPic=<?php echo ($row['picture']);?>&lngFilmTitleID=<?php echo ($row['lngFilmTitleID']);?>'>
                 <button type="button" class="btn btn-warning"><img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
