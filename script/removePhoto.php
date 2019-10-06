@@ -5,5 +5,4 @@
     unlink("../pictures/profile/". $row[0]);
 
     mysqli_free_result($results);
-        mysqli_close( $conn );
 ?>

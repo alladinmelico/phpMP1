@@ -31,9 +31,9 @@ include('includes/navigation.php');?>
     <tr style="color:white;">
         <td class="text-center"><?php echo $row['lngCertificateID'];?></td>
         <td class="text-center"><?php echo $row['strCertificate'];?></td>
-        <td class="text-sm-left"><a href='editCertificate.php?lngCertificateID="<?php echo ($row['lngCertificateID']);?>"'>
+        <td class="text-sm-left"><a href='createCertificate.php?lngCertificateID=<?php echo ($row['lngCertificateID']);?>'>
             <button type="button" class="btn btn-warning"><img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
-        <td class="text-sm-left"><a href='deleteCertificate.php?lngCertificateID="<?php echo ($row['lngCertificateID']);?>"'>
+        <td class="text-sm-left"><a href='deleteData.php?lngCertificateID=<?php echo ($row['lngCertificateID']);?>'>
             <button type="button" class="btn btn-danger"><img src="../pictures\icons\trash.png" alt="" width=20;></button></a></td>
     </tr>
     <?php

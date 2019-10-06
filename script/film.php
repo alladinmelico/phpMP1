@@ -47,9 +47,9 @@ include('includes/navigation.php');?>
         <td class="d-inline-block text-truncate" style="max-width: 150px;"><?php echo $row['memFilmAdditionalInfo'];?></td>
         <td class="text-center"><?php echo $row['strGenre'];?></td>
         <td class="text-center"><?php echo $row['strCertificate'];?></td>
-        <td class="text-sm-left"><a href='editFilm.php?lngFilmTitleID="<?php echo ($row['lngFilmTitleID']);?>"'>
+        <td class="text-sm-left"><a href='createFilm.php?lngFilmTitleID=<?php echo ($row['lngFilmTitleID']);?>'>
             <button type="button" class="btn btn-warning"><img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
-        <td class="text-sm-left"><a href='deleteFilm.php?lngFilmTitleID="<?php echo ($row['lngFilmTitleID']);?>"'>
+        <td class="text-sm-left"><a href='deleteData.php?lngFilmTitleID=<?php echo ($row['lngFilmTitleID']);?>'>
             <button type="button" class="btn btn-danger"><img src="../pictures\icons\trash.png" alt="" width=20;></button></a></td>
     </tr>
     <?php

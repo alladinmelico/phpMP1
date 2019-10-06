@@ -85,7 +85,7 @@ mysqli_close($conn);
 </style>
 
     <div class="content font-weight-light">
-        <div class="container-fluid float-left " style="width: 20rem;margin-top: 3rem;margin-left:10rem;position:fixed;">
+        <div class="container-fluid float-left " style="width: 20rem;margin-top: 3rem;margin-left:3 rem;position:fixed;">
             <img src="../pictures/poster/<?php echo ($pic);?>" class="border border-white img-fluid  rounded-lg" alt="">
         </div>
 

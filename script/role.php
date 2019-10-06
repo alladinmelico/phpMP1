@@ -31,9 +31,9 @@ include('includes/navigation.php');?>
     <tr style="color:white;">
         <td class="text-center"><?php echo $row['lngRoleTypeID'];?></td>
         <td class="text-center"><?php echo $row['strRoleType'];?></td>
-        <td class="text-sm-left"><a href='editRole.php?lngRoleTypeID="<?php echo ($row['lngRoleTypeID']);?>"'>
+        <td class="text-sm-left"><a href='createRole.php?lngRoleTypeID=<?php echo ($row['lngRoleTypeID']);?>'>
             <button type="button" class="btn btn-warning"><img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
-        <td class="text-sm-left"><a href='deleteRole.php?lngRoleTypeID="<?php echo ($row['lngRoleTypeID']);?>"'>
+        <td class="text-sm-left"><a href='deleteData.php?lngRoleTypeID=<?php echo ($row['lngRoleTypeID']);?>'>
             <button type="button" class="btn btn-danger"><img src="../pictures\icons\trash.png" alt="" width=20;></button></a></td>
     </tr>
     <?php

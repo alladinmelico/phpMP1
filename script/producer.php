@@ -35,9 +35,9 @@ include('includes/navigation.php');?>
         <td class="text-center"><?php echo $row['strProducerName'];?></td>
         <td class="text-center"><?php echo $row['hypContactEmailAddress'];?></td>
         <td class="text-center"><?php echo $row['hypWebsite'];?></td>
-        <td class="text-sm-left"><a href='editProducer.php?lngProducerID="<?php echo ($row['lngProducerID']);?>"'>
+        <td class="text-sm-left"><a href='createProducer.php?lngProducerID=<?php echo ($row['lngProducerID']);?>'>
             <button type="button" class="btn btn-warning"><img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
-        <td class="text-sm-left"><a href='deleteProducer.php?lngProducerID="<?php echo ($row['lngProducerID']);?>"'>
+        <td class="text-sm-left"><a href='deleteData.php?lngProducerID=<?php echo ($row['lngProducerID']);?>'>
             <button type="button" class="btn btn-danger"><img src="../pictures\icons\trash.png" alt="" width=20;></button></a></td>
     </tr>
     <?php

@@ -87,6 +87,7 @@ $('.toast').toast('show');
 </ul>
 
 
+
 <?php
 include ('script/includes/config.php');
 $pics = array();

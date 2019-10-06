@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     $lngFilmTitleID = $_GET['lngFilmTitleID'];
 
     $sql = "DELETE FROM tblfilmsactorroles WHERE lngFilmTitleID = '$lngFilmTitleID' AND lngActorID = '$lngActorID';";
-    echo $sql;
+    
     $result = mysqli_query( $conn,$sql);
 
     if ($result) {
@@ -30,7 +30,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST['submit']) == "EDIT")
     $sql = "UPDATE tblfilmsactorroles SET strCharacterName = '$strCharacterName', memCharaterDescription='$memCharaterDescription',
        lngActorID='$lngActorID', lngRoleTypeID='$lngRoleTypeID',lngFilmTitleID='$lngFilmTitleID'
        WHERE lngActorID='$lngActorID' AND lngFilmTitleID='$lngFilmTitleID';";
-    echo $sql;
+    
     $result = mysqli_query( $conn,$sql);
 
     if ($result) {
@@ -51,7 +51,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST['submit']) == "ADD")
     
     $sql = "INSERT INTO tblfilmsactorroles (strCharacterName,memCharaterDescription,lngActorID,lngRoleTypeID,lngFilmTitleID) 
     VALUES('$strCharacterName','$memCharaterDescription','$lngActorID','$lngRoleTypeID','$lngFilmTitleID');";
-    echo $sql;
+    
     $result = mysqli_query( $conn,$sql);
 
     if ($result) {

@@ -1,13 +1,15 @@
 <?php include ('header.php');include('includes/navigation.php');?>
 <body>
 <script type="text/javascript">
-    if (<?php 
-        if (isset($_GET['actID']))
-            { echo "true" ;}
-             else echo "false";?>){
-	$(document).ready(function(){
-		$("#ModalCenter").modal('show');
-	})};
+    if (<?php if (isset($_POST['submit']))
+        {echo "true";}
+        else echo "false";?>)
+    {
+        $(document).ready(function()
+            {
+                $("#ModalCenter").modal('show');
+            })
+	};
 </script>
 <?php 
     
@@ -40,7 +42,7 @@
     
     while ($row = mysqli_fetch_array($result))
     { ?>
-    <form action="#" method="GET">
+    <form action="#" method="POST">
     <tr style="color:white;">
         <input type="hidden" name="pic" value="<?php echo $row['picture'];?>">
         <input type="hidden" name="actName" value="<?php echo $row['strActorFullName'];?>">
@@ -50,12 +52,14 @@
         <td class="text-center"><?php echo $row['lngActorID'];?></td>
         <td class="text-center"><?php echo $row['strActorFullName'];?></td>
         <td class="text-center"><?php echo $row['memActorNotes'];?></td>
-        <td class="text-sm-left"><a href='editActor.php?lngActorID="<?php echo ($row['lngActorID']);?>"'>
-            <button type="button" class="btn btn-warning"><img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
         <td class="text-sm-left">
-        <a href="actor.php">
-            <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                <img src="../pictures\icons\trash.png" alt="" width=20;></button>
+            <a href='createActor.php?lngActorID=<?php echo ($row['lngActorID']);?>'>
+            <button type="button" class="btn btn-warning" name="edit" value="EDIT">
+                <img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
+        <td class="text-sm-left">
+            <a href="actor.php">
+                <button type="submit" class="btn btn-danger" name="submit" value="EDIT">
+                    <img src="../pictures\icons\trash.png" alt="" width=20;></button>
         </a>
         </td>
         </form>
@@ -69,6 +73,9 @@
     }
 
 ?>
+
+<!-- MODALS -->
+
     <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
@@ -78,10 +85,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="deleteActor.php" method="GET">
-                <input type="hidden" name="lngActorID" value="<?php echo $_GET['actID'];?>">
-                <h3 class="text-center"><?php echo $_GET['actName'];?></h3>
-                <img src="../pictures/profile/<?php echo $_GET['pic'];?>" alt="" class="img-thumbnail mx-auto d-block" width=100>
+                <form action="deleteData.php" method="GET">
+                <input type="hidden" name="lngActorID" value="<?php echo $_POST['actID'];?>">
+                <h3 class="text-center"><?php echo $_POST['actName'];?></h3>
+                <img src="../pictures/profile/<?php echo $_POST['pic'];?>" alt="" class="img-thumbnail mx-auto d-block" width=100>
             </div>
             <div class="modal-footer">
                     <a href="actor.php?search="><button type="button" class="btn btn-secondary">Close</button></a>

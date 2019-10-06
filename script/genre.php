@@ -31,9 +31,9 @@ include('includes/navigation.php');?>
     <tr style="color:white;">
         <td class="text-center"><?php echo $row['lngGenreID'];?></td>
         <td class="text-center"><?php echo $row['strGenre'];?></td>
-        <td class="text-sm-left"><a href='editGenre.php?lngGenreID="<?php echo ($row['lngGenreID']);?>"'>
+        <td class="text-sm-left"><a href='createGenre.php?lngGenreID=<?php echo ($row['lngGenreID']);?>'>
             <button type="button" class="btn btn-warning"><img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
-        <td class="text-sm-left"><a href='deleteGenre.php?lngGenreID="<?php echo ($row['lngGenreID']);?>"'>
+        <td class="text-sm-left"><a href='deleteData.php?lngGenreID=<?php echo ($row['lngGenreID']);?>'>
             <button type="button" class="btn btn-danger"><img src="../pictures\icons\trash.png" alt="" width=20;></button></a></td>
     </tr>
     <?php
