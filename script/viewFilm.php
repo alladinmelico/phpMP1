@@ -206,7 +206,7 @@ mysqli_close($conn);
 
 
           <div class="container-fluid float-right" style="width: 60rem;margin-top: 1rem;color:white;">
-            <h3>Story <a href="editFilm.php?lngFilmTitleID=<?php echo $lngFilmTitleID; ?>"><button type="button" class="btn btn-info">
+            <h3>Story <a href="createFilm.php?lngFilmTitleID=<?php echo $lngFilmTitleID; ?>"><button type="button" class="btn btn-info">
             <img src="../pictures\icons\edit-interface-sign.png" alt="" width="20px" class="rounded-circle bg-light"></button></a> </h3>
             <table class = "table table-bordered table-dark table-hover table-hover">
             <tbody>

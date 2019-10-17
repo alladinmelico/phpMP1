@@ -1,11 +1,34 @@
 <?php include('header.php');
 include ('includes/config.php');
 include('includes/navigation.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $strCharacterName = $_POST['strCharacterName'];
+    $memCharaterDescription = $_POST['memCharaterDescription'];
+    $lngActorID = $_POST['lngActorID'];
+    $lngRoleTypeID = $_POST['lngRoleTypeID'];
+    $lngFilmTitleID = $_POST['lngFilmTitleID'];
+    $lngProducerID = $_POST['lngProducerID'];
+    
+    $sql = "INSERT INTO tblfilmsactorroles(strCharacterName,memCharaterDescription,lngActorID,lngRoleTypeID,lngFilmTitleID) 
+        VALUES ('$strCharacterName','$memCharaterDescription','$lngActorID','$lngRoleTypeID','$lngFilmTitleID');";
+        
+    $result = mysqli_query( $conn,$sql);
+
+    $sql = "INSERT INTO tblfilmtitlesproducers(lngFilmTitleID,lngProducerID) 
+        VALUES ('$lngFilmTitleID','$lngProducerID');";
+    $result = mysqli_query( $conn,$sql);
+
+    if ($result) {
+        header("location: production.php?search=#");
+    }
+}
+
 ?>
  <h2 class="text-center" style="color:white;">CREATE A PRODUCTION</h2>
   <div class="d-flex justify-content-center" style="color:white;">
 
-    <form method="POST" action="createFilmProcess.php">
+    <form method="POST" action="#">
         <label>Actor</label>
             <?php 
                 $resultCat = mysqli_query($conn,"SELECT * FROM tblActors;");
@@ -54,6 +77,6 @@ include('includes/navigation.php');
                     </tr>
             <?php }?></select> <br>
         <br>
-        <input type="submit" formaction="createProductionProcess.php" name="Submit" value="CREATE" class="btn btn-primary btn-lg btn-block"> <br>
+        <input type="submit" formaction="#" name="Submit" value="CREATE" class="btn btn-primary btn-lg btn-block"> <br>
     </div>
   </form>
