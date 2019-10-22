@@ -50,13 +50,17 @@
         <input type="hidden" name="search" value="">
         <td class="text-center"><img src="../pictures/profile/<?php echo $row['picture'];?>" alt="" width="80px"></td>
         <td class="text-center"><?php echo $row['lngActorID'];?></td>
-        <td class="text-center"><?php echo $row['strActorFullName'];?></td>
+        <td class="text-center">
+            <a href="viewActor.php?lngActorId=<?php echo $row['lngActorID']?>&actorPicture=<?php echo $row['picture']?>">
+                <?php echo $row['strActorFullName'];?>
+            </a>
+        </td>
         <td class="text-center"><?php echo $row['memActorNotes'];?></td>
-        <td class="text-sm-left">
+        <td class="text-sm-center bg-warning">
             <a href='createActor.php?lngActorID=<?php echo ($row['lngActorID']);?>'>
             <button type="button" class="btn btn-warning" name="edit" value="EDIT">
                 <img src="../pictures\icons\pencil.png" alt="" width=20;></button></a></td>
-        <td class="text-sm-left">
+        <td class="text-sm-center bg-danger">
             <a href="actor.php">
                 <button type="submit" class="btn btn-danger" name="submit" value="EDIT">
                     <img src="../pictures\icons\trash.png" alt="" width=20;></button>

@@ -12,7 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     
     $result = mysqli_query( $conn,$sql);
 
-    if ($result) {
+    if ($result AND isset($_POST['viewActor'])) {
+        header("location: viewActor.php?lngActorId=$lngActorID&actorPicture=$pic");
+    } else 
+    {
         header("location: viewFilm.php?lngFilmTitleID=$lngFilmTitleID&filmPic=$pic");
     }
 
@@ -33,7 +36,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST['submit']) == "EDIT")
     
     $result = mysqli_query( $conn,$sql);
 
-    if ($result) {
+    if ($result AND isset($_POST['viewActor'])) {
+        header("location: viewActor.php?lngActorId=$lngActorID&actorPicture=$pic");
+    } else 
+    {
         header("location: viewFilm.php?lngFilmTitleID=$lngFilmTitleID&filmPic=$pic");
     }
 }
@@ -54,7 +60,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST['submit']) == "ADD")
     
     $result = mysqli_query( $conn,$sql);
 
-    if ($result) {
+    if ($result AND isset($_POST['viewActor'])) {
+        header("location: viewActor.php?lngActorId=$lngActorID&actorPicture=$pic");
+    } else 
+    {
         header("location: viewFilm.php?lngFilmTitleID=$lngFilmTitleID&filmPic=$pic");
     }
 }
