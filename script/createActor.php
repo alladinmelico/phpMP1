@@ -1,4 +1,7 @@
-<?php include('header.php');include('includes/navigation.php');require ("includes/config.php");
+<?php 
+include('header.php');
+include('includes/navigation.php');
+require ("includes/config.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES["photo"])) { 
@@ -20,48 +23,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = 'Invalid file type. Only PDF, JPG, GIF and PNG types are accepted.';
     }
   
-    if(count($errors) === 0) {
+    if(count($errors) === 0)
+    {
       $file_name	 = $_FILES["photo"]["name"]; 
       $file_tmp_name = $_FILES["photo"]["tmp_name"];
       $targetDir = "../pictures/profile";
       $targetFile = $targetDir.$_FILES['photo']['name'];
   
-      if(move_uploaded_file($file_tmp_name, "$targetDir/$file_name")){
-        echo "file uploaded succeeded";
-
+      if(move_uploaded_file($file_tmp_name, "$targetDir/$file_name"))
+      {
         $lngActorID = $_POST['lngActorID'];
-        $name= $_POST['strActorFullName'];
-        $memo = $_POST['memActorNotes'];
+        $name= mysqli_real_escape_string($conn,trim($_POST['strActorFullName']));
+        $memo =  mysqli_real_escape_string($conn,trim($_POST['memActorNotes']));
+        $stmt = null;
+
+        mysqli_query($conn,"START TRANSACTION");
         
         if($_POST['Submit'] == "ADD")
         {
             $sql = "INSERT INTO tblactors (strActorFullName,memActorNotes,picture) 
-            VALUES ('$name','$memo','$file_name');";
+            VALUES (?,?,?);";
+            $stmt = mysqli_prepare($conn,$sql);
+            mysqli_stmt_bind_param($stmt,"sss",$name,$memo,$file_name);
         }
         elseif ($_POST['Submit'] == "EDIT")
         {
-            $sql = "UPDATE tblactors SET strActorFullName='$name',memActorNotes='$memo',picture='$file_name' 
-            WHERE lngActorID = $lngActorID;";
+            $sql = "UPDATE tblactors SET strActorFullName=?,memActorNotes=?,picture=?
+            WHERE lngActorID = ?;";
+            $stmt = mysqli_prepare($conn,$sql);
+            mysqli_bind_param($stmt,"sssi",$name,$memo,$file_name,$lngActorID);
         }
 
-        $result = mysqli_query( $conn,$sql);
+        
     
-        if ($result) {
-            header("location: actor.php?search=#");
-        }
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_commit($conn);header("location: actor.php?search=#");
         } else { 
         echo "File upload Failed";
+        } 
+    } 
+    } else
+    {
+        foreach($errors as $error)
+        {
+            echo '<script>alert("'.$error.'");</script>';
         }
-        } else {
-            foreach($errors as $error) {
-                echo '<script>alert("'.$error.'");</script>';
-            }
-    
-            die(); //Ensure no more processing is done
-        }
-  }
-  }
 
+        die(); //Ensure no more processing is done
+    }
+}
+}
 if(isset($_GET["lngActorID"]))
 {
     $lngActorID = $_GET['lngActorID'];
@@ -77,6 +88,7 @@ if(isset($_GET["lngActorID"]))
     $strActorFullName = "";
     $memActorNotes = "";
     $process = "ADD";
+    $row = [""];
 }
 ?>
  <h2 class="text-center" style="color:white;"><?php echo $process; ?> ACTOR</h2>
@@ -97,7 +109,7 @@ if(isset($_GET["lngActorID"]))
         <input type="text" name="strActorFullName" class="form-control" value="<?php echo $strActorFullName ?>" required> <br>
     <label>Note</label>
         <input type="text" name="memActorNotes" class="form-control" value="<?php echo $memActorNotes; ?>" required> <br>
-    <input type="submit" formaction="createActor.php" name="Submit" value="<?php echo $process ?>" class="btn btn-primary btn-lg btn-block"> <br>
+    <input type="submit" formaction="createActor.php" name="Submit" value="<?php echo $process; ?>" class="btn btn-primary btn-lg btn-block"> <br>
       
       </div>
       </form>

@@ -8,7 +8,7 @@ $pic = $_GET['filmPic'];
 require('includes/config.php');
 
 $data = array();
-$sql = "CALL viewSelectedFilm('$lngFilmTitleID');";
+$sql = "CALL selectFilm('$lngFilmTitleID');";
 $sql .= "SELECT prod.lngProducerID, prod.strProducerName, ftp.lngFilmTitleID FROM tblProducers prod LEFT JOIN tblfilmtitlesproducers ftp ON ftp.lngProducerID = prod.lngProducerID 
           GROUP BY prod.lngProducerID HAVING (ftp.lngFilmTitleID <> '$lngFilmTitleID') OR (ftp.lngFilmTitleID IS NULL);";
 $sql .= "SELECT * FROM tblActors;";

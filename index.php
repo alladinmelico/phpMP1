@@ -11,7 +11,14 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</head>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
+    <link rel="stylesheet" href="datePicker/css/bootstrap-datepicker.css">
+    <script src="datePicker/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
+  </head>
 <style>
 .parallax {
     background-attachment: fixed;
@@ -46,43 +53,22 @@ $('.toast').toast('show');
 </script>
 <body>
 
-<ul class="nav justify-content-center border-bottom" style="background: #11998e;
+<ul class="nav border-bottom nav-fill" style="background: #11998e;
                 background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
-                background: linear-gradient(to right, #11998e, #38ef7d);
-    color: black;">
+                background: linear-gradient(to right, #11998e, #38ef7d);">
   <li class="nav-item"  style="margin-top:1em;">
-    <a class="nav-link"  style="color:white;font-size:2em;" ><img src="pictures\icons\home.png" alt="" width=50> Home</a>
+    <a href="index.php" class="nav-link" style="color:white;font-size:1.75em;"><img src="pictures\icons\home.png" alt="" width=40> Home</a>
   </li>
-  <li class="nav-item dropdown " style="margin-top:1em;">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="script/#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;font-size:2em;">
-    <img src="pictures\icons\user-shape.png" alt="" width=50> Actor</a>
-      <div class="dropdown-menu"  style=" background: #11998e;
-          background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
-          background: linear-gradient(to right, #11998e, #38ef7d);">
-        <a class="dropdown-item" href="script/actor.php?search=#" style="color:black;font-size:2em;">
-        <img src="pictures\icons\man.png" alt="" width=50> Name</a>
-        <a class="dropdown-item" href="script/role.php?search=#" style="color:black;font-size:2em;">
-        <img src="pictures\icons\group-profile-users.png" alt="" width=50> Roles</a>
-      </div>
-  </li>
-  <li class="nav-item dropdown " style="margin-top:1em;">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="script/#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;font-size:2em;">
-      <img src="pictures\icons\film-strip-with-two-photograms.png" alt="" width=50> Films</a>
-      <div class="dropdown-menu"  style=" background: #11998e;
-          background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
-          background: linear-gradient(to right, #11998e, #38ef7d);font-size:2em;">
-        <a class="dropdown-item" href="script/film.php?search=#" style="color:black;">
-        <img src="pictures\icons\font-symbol-of-letter-a.png" alt="" width=50>Titles</a>
-        <a class="dropdown-item" href="script/producer.php?search=#" style="color:black;">
-        <img src="pictures\icons\facetime-button.png" alt="" width=50>Producers</a>
-        <a class="dropdown-item" href="script/genre.php?search=#" style="color:black;">
-        <img src="pictures\icons\ticket.png" alt="" width=50>Genres</a>
-        <a class="dropdown-item" href="script/certificate.php?search=#" style="color:black;">
-        <img src="pictures\icons\certificate-shape.png" alt="" width=50>Certificates</a>
-      </div>
+  <li class="nav-item mr-1"  style="margin-top:1em;">
+    <form action="script/globalSearch.php">
+      <input type="text" name="search" value="">
+      <input type="submit" value="SEARCH"  class="btn btn-info" style=" background: #11998e;
+      background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
+      background: linear-gradient(to right, #11998e, #38ef7d);">
+    </form>
   </li>
   <li class="nav-item"  style="margin-top:1em;">
-    <a class="nav-link" href="script/production.php?search=#" style="color:white;font-size:2em;" ><img src="pictures\icons\settings.png" alt="" width=50>Production</a>
+  <a href="script/login.php" class="nav-link" style="color:white;font-size:1.75em;"><img src="pictures\icons\user-shape.png" alt="" width=40>Login</a>
   </li>
 </ul>
 
@@ -91,7 +77,7 @@ $('.toast').toast('show');
 <?php
 include ('script/includes/config.php');
 $pics = array();
-$resultSlider = mysqli_query( $conn,"SELECT * FROM production prod INNER JOIN tblfilmtitles ft on ft.lngFilmTitleID = prod.lngFilmTitleID;" );
+$resultSlider = mysqli_query( $conn,"SELECT * FROM tblfilmtitles;" );
 while ($rowSlider =  mysqli_fetch_array($resultSlider)){
   $pics[] = $rowSlider['picture'];
 }?>
@@ -117,15 +103,26 @@ while ($rowSlider =  mysqli_fetch_array($resultSlider)){
     </a>
   </div>
 
-<h1 class="display-4 text-center text-white mt-5">Now Showing!</h1>
-
-<?php
-$result = mysqli_query( $conn,"call viewAllFilms();" );
-    while ($row = mysqli_fetch_array($result))
-    {?>
+  
+  <?php
+include ('script/includes/indexFilter.php');
+if (($_SERVER["REQUEST_METHOD"] == "GET") AND isset($_GET['searchInput']))
+{
+    $strSearch = mysqli_real_escape_string($conn,$_GET['searchInput']);
+    $dtmBegin = date_format(new DateTime($_GET['dtmBegin']), "Y-m-d");
+    $dtmEnd =  date_format(new DateTime($_GET['dtmEnd']), "Y-m-d");
+} else {
+    $strSearch = "";
+    $dtmBegin = date("Y-m-d");
+    $dtmEnd = date("Y-m-d");
+}
+$sql = "call getAllFilms('$dtmBegin','$dtmEnd','$strSearch');";
+$result = mysqli_query( $conn,$sql);
+while ($row = mysqli_fetch_array($result))
+{?>
     <tr style="color:white;" ">
-      <td>
-      <div class="container-fluid mx-auto " style="width: 40rem;margin-top:5rem;" >
+        <td>
+          <div class="container-fluid mx-auto " style="width: 40rem;margin-top:5rem;" >
         <div class="card mb-3 box shadow p-2 cardBg" style="max-width: 40rem; background-image: url('pictures/bg/5c289afb9a157510e6893a57_29. Pale Cornflower Blue.jpg');" >
           <div class="row no-gutters ">
             <div class="col-md-4 ">
