@@ -3,8 +3,10 @@ include('header.php');
 
 session_start();
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
+  include('includes/config.php');
   $_SESSION['userName'] = $_POST['userName'];
   $_SESSION['userPassword'] = $_POST['userPassword'];
+  $_SESSION['db_name'] = "mysql";
 
   // if 
 
@@ -25,7 +27,7 @@ background: linear-gradient(342deg, rgba(17,153,142,1) 0%, rgba(33,163,94,1) 100
 
     <form action="#" method="POST">
         <label class="mt-4">Username</label>
-        <input type="text" class="form-control" name="userName" required>
+        <input type="text" class="form-control" name="userName" value="" required>
         <label class="mt-4">Password</label>
         <input type="password" class="form-control" name="userPassword" value="">
         <div class="form-check form-check-inline mt-5">
