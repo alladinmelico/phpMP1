@@ -1,4 +1,4 @@
-<?php include ('header.php');include('includes/navigation.php');?>
+<?php include ('header.php');?>
 <body>
 <script type="text/javascript">
     if (<?php if (isset($_POST['submit']))
@@ -14,12 +14,14 @@
 <?php 
     
     include ('includes/config.php');
+    include('includes/navigation.php');
     include ('includes/search.php');
     if (isset($_GET['search']))
     {
     $search = $_GET['search'];
     $result = mysqli_query( $conn,"SELECT * FROM tblactors WHERE strActorFullName LIKE '%". $search."%';" );
-    $num_rows = mysqli_num_rows( $result ); ?>
+    $num_rows = mysqli_num_rows( $result );
+    ?>
     
     <br>
     <div class="bs-example">

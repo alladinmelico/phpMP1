@@ -1,6 +1,5 @@
 <?php include('header.php');
 include ('includes/config.php');
-include('includes/navigation.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES["photo"])) { 
@@ -30,28 +29,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if(move_uploaded_file($file_tmp_name, "$targetDir/$file_name")){
 
-        $lngFilmTitleID = $_POST['lngFilmTitleID'];
-        $strFilmTitle = $_POST['strFilmTitle'];
-        $memFilmStory = $_POST['memFilmStory'];
-        $dtmFilmReleaseDate = $_POST['dtmFilmReleaseDate'];
-        $intFilmDuration = $_POST['intFilmDuration'];
-        $memFilmAdditionalInfo = $_POST['memFilmAdditionalInfo'];
-        $lngGenreID = $_POST['lngGenreID'];
-        $lngCertificateID = $_POST['lngCertificateID'];
+        $lngFilmTitleID =(int) mysqli_real_escape_string($conn,trim($_POST['lngFilmTitleID']));
+        $strFilmTitle = mysqli_real_escape_string($conn,trim($_POST['strFilmTitle']));
+        $memFilmStory = mysqli_real_escape_string($conn,trim($_POST['memFilmStory']));
+        $dtmFilmReleaseDate = mysqli_real_escape_string($conn,trim($_POST['dtmFilmReleaseDate']));
+        $intFilmDuration = (int) mysqli_real_escape_string($conn,trim($_POST['intFilmDuration']));
+        $memFilmAdditionalInfo = mysqli_real_escape_string($conn,trim($_POST['memFilmAdditionalInfo']));
+        $lngGenreID =(int) $_POST['lngGenreID'];
+        $lngCertificateID =(int) $_POST['lngCertificateID'];
+        $stmt = NULL;
+        $sql = NULL;
 
+        mysqli_query($conn,"START TRANSACTION");
         if ($_POST['submit'] == "ADD")
         {
             $sql = "INSERT INTO tblFilmTitles (strFilmTitle,memFilmStory,dtmFilmReleaseDate,intFilmDuration,memFilmAdditionalInfo,lngGenreID,lngCertificateID,picture)
-            VALUES ('$strFilmTitle','$memFilmStory','$dtmFilmReleaseDate','$intFilmDuration','$memFilmAdditionalInfo','$lngGenreID','$lngCertificateID','$file_name');";
+            VALUES (?,?,?,?,?,?,?,?);";
+            $stmt = mysqli_prepare($conn,$sql);
+            mysqli_stmt_bind_param($stmt,"sssisiis",
+            $strFilmTitle,$memFilmAdditionalInfo,$dtmFilmReleaseDate,$intFilmDuration,
+            $memFilmAdditionalInfo,$lngGenreID,$lngCertificateID,$file_name);
         } else {
-            $sql = "UPDATE tblFilmTitles SET lngFilmTitleID = '$lngFilmTitleID',strFilmTitle='$strFilmTitle',memFilmStory='$memFilmStory',
-            dtmFilmReleaseDate='$dtmFilmReleaseDate',intFilmDuration='$intFilmDuration',memFilmAdditionalInfo='$memFilmAdditionalInfo',lngGenreID='$lngGenreID',
-            lngCertificateID='$lngCertificateID',picture='$file_name' WHERE lngFilmTitleID = '$lngFilmTitleID'";
+            $sql = "UPDATE tblFilmTitles SET strFilmTitle=?,memFilmStory=?,
+            dtmFilmReleaseDate=?,intFilmDuration=?,
+            memFilmAdditionalInfo=?,lngGenreID=?,
+            lngCertificateID=?,picture=? WHERE lngFilmTitleID = ?";
+            if($stmt = mysqli_prepare($conn,$sql)){
+                if(mysqli_stmt_bind_param($stmt,"sssisiisi",$strFilmTitle,
+                $memFilmStory,$dtmFilmReleaseDate,$intFilmDuration,$memFilmAdditionalInfo,
+                $lngGenreID,$lngCertificateID,$file_name,$lngFilmTitleID)){
+                    echo "binding failed";
+                    echo mysqli_stmt_error($stmt);
+                    echo $strFilmTitle,
+                    $memFilmStory,$dtmFilmReleaseDate,$intFilmDuration,$memFilmAdditionalInfo,
+                    $lngGenreID,$lngCertificateID,$file_name,$lngFilmTitleID;
+                }
+            } else {
+                echo "preparing statement failed";
+            }
+            
         }
-        $result = mysqli_query( $conn,$sql);
 
-        if ($result) {
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_commit($conn);
             header("location: film.php?search=#");
+        } else {
+            echo "execution failed";
         }
 
       } else { 
@@ -88,6 +111,7 @@ if (isset($_GET['lngFilmTitleID']))
     $process = "ADD";
 }
 ?>
+<?php include('includes/navigation.php');?>
 <h2 class="text-center" style="color:white;"><?php echo $process;?> FILM</h2>
   <div class="d-flex justify-content-center" style="color:white;">
 
@@ -123,7 +147,6 @@ if (isset($_GET['lngFilmTitleID']))
                 while($rowCategory = mysqli_fetch_assoc($resultCat))
                 {?>
                     <tr>
-                    <option value=""></option>
                     <td><option name="strGenre" value="<?php echo $rowCategory['lngGenreID'];?>" required><?php echo $rowCategory['strGenre'];?></option></td>
                     </tr>
             <?php }?>

@@ -1,6 +1,7 @@
-<?php include('header.php');
+<?php
+include('header.php');
+
 include ('includes/config.php');
-include('includes/navigation.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $strGenre = $_POST['strGenre'];
@@ -32,7 +33,7 @@ if (isset($_GET['lngGenreID']))
   $process = "ADD";
 }
 ?>
-
+<?php include('includes/navigation.php');?>
 <h2 class="text-center" style="color:white;"><?php echo $process; ?> GENRE</h2>
   <div class="d-flex justify-content-center" style="color:white;">
 

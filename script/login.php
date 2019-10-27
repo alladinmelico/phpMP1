@@ -1,5 +1,19 @@
 <?php
 include('header.php');
+
+session_start();
+if ($_SERVER["REQUEST_METHOD"]=="POST"){
+  $_SESSION['userName'] = $_POST['userName'];
+  $_SESSION['userPassword'] = $_POST['userPassword'];
+
+  // if 
+
+  if($_SESSION['userName']){
+    header("location: dashboard.php");
+  }
+} else{
+  session_destroy();
+}
 ?>
 
 <body>
@@ -9,13 +23,13 @@ include('header.php');
 background: linear-gradient(342deg, rgba(17,153,142,1) 0%, rgba(33,163,94,1) 100%);">
     <h5 class="card-title justify-content-center">LOG IN</h5>
 
-    <form action="">
+    <form action="#" method="POST">
         <label class="mt-4">Username</label>
         <input type="text" class="form-control" name="userName" required>
         <label class="mt-4">Password</label>
-        <input type="password" class="form-control" name="userName" value="">
+        <input type="password" class="form-control" name="userPassword" value="">
         <div class="form-check form-check-inline mt-5">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+            <input class="form-check-input" type="checkbox" name="rememberMe">
             <label class="form-check-label sm" for="inlineCheckbox1">Remember me</label>
         </div>
         <input type="submit" name="submit" class="btn btn-light text-info mx-auto form-control">

@@ -53,29 +53,36 @@ $('.toast').toast('show');
 </script>
 <body>
 
-<ul class="nav border-bottom nav-fill" style="background: #11998e;
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: #11998e;
                 background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
                 background: linear-gradient(to right, #11998e, #38ef7d);">
-  <li class="nav-item"  style="margin-top:1em;">
-    <a href="index.php" class="nav-link" style="color:white;font-size:1.75em;"><img src="pictures\icons\home.png" alt="" width=40> Home</a>
-  </li>
-  <li class="nav-item mr-1"  style="margin-top:1em;">
-    <form action="script/globalSearch.php">
-      <input type="text" name="search" value="">
-      <input type="submit" value="SEARCH"  class="btn btn-info" style=" background: #11998e;
-      background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
-      background: linear-gradient(to right, #11998e, #38ef7d);">
-    </form>
-  </li>
-  <li class="nav-item"  style="margin-top:1em;">
-  <a href="script/login.php" class="nav-link" style="color:white;font-size:1.75em;"><img src="pictures\icons\user-shape.png" alt="" width=40>Login</a>
-  </li>
-</ul>
+  
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <a class="navbar-brand" href="index.php" style="font-size:2rem;">
+      <img src="pictures\icons\home.png" alt="" width=30>  Home
+    </a>
+  </div>
+
+      <form action="script/globalSearch.php" style="width:20rem;" class="form-inline">
+        <div class="input-group">
+          <input type="search" placeholder="Search" name="search" value="" class="form-control">
+          <div class="input-group-append">
+            <input type="submit" value="SEARCH"  class="btn btn-outline-dark form-control" >
+          </div>
+        </div>
+      </form>
+    
+    <a href="script/login.php" class="text-decoration-none text-dark" style="font-size:2rem;">
+      <img src="pictures\icons\user-shape.png" alt="" width=30>   Login
+    </a>
+</nav>
 
 
 
 <?php
 include ('script/includes/config.php');
+$_SESSION['userName'] = "filmGuest";
+$_SESSION['userPassword'] = "password";
 $pics = array();
 $resultSlider = mysqli_query( $conn,"SELECT * FROM tblfilmtitles;" );
 while ($rowSlider =  mysqli_fetch_array($resultSlider)){

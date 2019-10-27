@@ -1,6 +1,6 @@
 <?php include('header.php');
 include ('includes/config.php');
-include('includes/navigation.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $strCertificate = $_POST['strCertificate'];
@@ -33,6 +33,7 @@ if (isset($_GET['lngCertificateID']))
   $process = "ADD";
 }
 ?>
+<?php include('includes/navigation.php');?>
  <h2 class="text-center" style="color:white;"><?Php echo $process;?> CERTIFICATE</h2>
   <div class="d-flex justify-content-center" style="color:white;">
 

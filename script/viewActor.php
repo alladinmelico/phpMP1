@@ -8,7 +8,7 @@ $pic = $_GET['actorPicture'];
 require('includes/config.php');
 
 $data = array();
-$sql = "CALL viewActor('$lngActorID');";
+$sql = "CALL selectActor('$lngActorID');";
 $sql .= "SELECT lngFilmTitleID,strFilmTitle FROM tblFilmTitles;";
 $sql .= "SELECT * FROM tblroletypes;";
 $sql .= "SELECT * FROM tblActors WHERE lngActorID = $lngActorID;";

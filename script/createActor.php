@@ -1,7 +1,7 @@
 <?php 
 include('header.php');
+require('includes/config.php');
 include('includes/navigation.php');
-require ("includes/config.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES["photo"])) { 
@@ -51,13 +51,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "UPDATE tblactors SET strActorFullName=?,memActorNotes=?,picture=?
             WHERE lngActorID = ?;";
             $stmt = mysqli_prepare($conn,$sql);
-            mysqli_bind_param($stmt,"sssi",$name,$memo,$file_name,$lngActorID);
+            if(mysqli_stmt_bind_param($stmt,"sssi",$name,$memo,$file_name,$lngActorID)){
+                echo "failed binding";
+            }
         }
 
         
     
         if (mysqli_stmt_execute($stmt)) {
-            mysqli_commit($conn);header("location: actor.php?search=#");
+            mysqli_commit($conn);
+            header("location: actor.php?search=#");
+            // FIX: headers already sent
         } else { 
         echo "File upload Failed";
         } 
