@@ -1,7 +1,7 @@
 <?php 
 include('header.php');
 require('includes/config.php');
-
+//FIX: directing to login
 if (isset($_SESSION['userName']) AND isset($_SESSION['userPassword'])){
     $userName = mysqli_real_escape_string($conn,$_SESSION['userName']);
     $userPassword = mysqli_real_escape_string($conn,$_SESSION['userPassword']);

@@ -40,7 +40,8 @@ include('includes/navigation.php');?>
     <tr style="color:white;">
         <td class="text-center"><img src="../pictures/poster/<?php echo $row['picture'];?>" alt="" width="80px"></td>
         <td class="text-center"><?php echo $row['lngFilmTitleID'];?></td>
-        <td class="text-center"><?php echo $row['strFilmTitle'];?></td>
+        <td class="text-center"><a href="viewFilm.php?lngFilmTitleID=<?php echo $row['lngFilmTitleID'];?>&filmPic=<?php echo $row['picture'];?>">
+            <?php echo $row['strFilmTitle'];?></a></td>
         <td class="d-inline-block text-truncate" style="max-width: 150px;"><?php echo $row['memFilmStory'];?></td>
         <td class="text-center"><?php echo $row['dtmFilmReleaseDate'];?></td>
         <td class="text-center"><?php echo $row['intFilmDuration'];?></td>

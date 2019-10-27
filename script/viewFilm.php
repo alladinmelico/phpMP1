@@ -16,6 +16,7 @@ $sql .= "SELECT * FROM tblfilmgenres;";
 $sql .= "SELECT * FROM tblfilmcertificates;";
 $sql .= "CALL selectFilmProducers('$lngFilmTitleID');";
 $sql .= "SELECT * FROM tblroletypes;";
+$sql .= "SELECT memFilmStory FROM tblFilmTitles WHERE lngFilmTitleID = $lngFilmTitleID";
 
 
 if (mysqli_multi_query($conn,$sql)){
@@ -211,14 +212,8 @@ mysqli_close($conn);
             </h3>
             <table class = "table table-bordered table-dark table-hover table-hover">
             <tbody>
-              <?php
-              $story = "";
-              foreach ($data[0] AS $row)
-              {
-                $story = $row['memFilmStory'];
-              } ?>
               <tr style="color:white;" class="showTrashRow">
-                  <td class="text-justify font-weight-light p-3"><p>&emsp;&emsp;&emsp;<?php echo $story; ?></p></td>
+                  <td class="text-justify font-weight-light p-3"><p>&emsp;&emsp;&emsp;<?php echo $data[7][0]['memFilmStory']; ?></p></td>
               </tr>
             </tbody>
             </table>
