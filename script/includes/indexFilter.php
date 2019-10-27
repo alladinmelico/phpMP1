@@ -5,8 +5,8 @@ if ((isset($_GET['dtmBegin'])) AND isset($_GET['dtmEnd']) AND isset($_GET['searc
     $dtmEndValue = $_GET['dtmEnd'];
     $searchInput = $_GET['searchInput'];
 } else {
-    $dtmBeginValue = date("Y/m/d");
-    $dtmEndValue = date("Y/m/d");
+    $dtmBeginValue = date("d/m/Y");
+    $dtmEndValue = date("d/m/Y");
     $searchInput = "";
 }
 ?>

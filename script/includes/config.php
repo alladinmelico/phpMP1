@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)){
+    session_start();
+}
 $db_host = "localhost";
 $db_username = "";
 $db_password = "";

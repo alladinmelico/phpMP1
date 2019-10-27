@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
   $_SESSION['userPassword'] = $_POST['userPassword'];
   $_SESSION['db_name'] = "mysql";
 
-  // if 
+  // TODO: cookies
 
   if($_SESSION['userName']){
     header("location: dashboard.php");

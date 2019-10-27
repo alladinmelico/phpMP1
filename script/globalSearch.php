@@ -1,6 +1,7 @@
 <?php
+require('includes/config.php');
+include('header.php');
 include('includes/guestNav.php');
-include('header.php')
 ?>
 
 <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
@@ -20,7 +21,7 @@ include('header.php')
   <div class="tab-pane fade show active" id="actor" role="tabpanel" aria-labelledby="actor-tab">
         <?php 
                 
-                include ('includes/config.php');
+                
                 if (isset($_GET['search']))
                 {
                 $search = $_GET['search'];
@@ -71,7 +72,7 @@ include('header.php')
 
   <div class="tab-pane fade bg-white text-info" id="film" role="tabpanel" aria-labelledby="film-tab">
     <?php 
-            include ('includes/config.php');
+    include ('includes/config.php');
             if (isset($_GET['search']))
             {
             $search = $_GET['search'];
@@ -123,7 +124,7 @@ include('header.php')
 
   <div class="tab-pane fade bg-white text-info" id="producer" role="tabpanel" aria-labelledby="producer-tab">
         <?php 
-            include ('includes/config.php');
+        include ('includes/config.php');
             if (isset($_GET['search']))
             {
             $search = $_GET['search'];
