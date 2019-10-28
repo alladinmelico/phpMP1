@@ -16,7 +16,7 @@ $sql .= "SELECT * FROM tblfilmgenres;";
 $sql .= "SELECT * FROM tblfilmcertificates;";
 $sql .= "CALL selectFilmProducers('$lngFilmTitleID');";
 $sql .= "SELECT * FROM tblroletypes;";
-$sql .= "SELECT memFilmStory FROM tblFilmTitles WHERE lngFilmTitleID = $lngFilmTitleID";
+$sql .= "call getFilmCertGenre('$lngFilmTitleID')";
 
 
 if (mysqli_multi_query($conn,$sql)){
@@ -87,6 +87,7 @@ mysqli_close($conn);
 
     <div class="content font-weight-light">
         <div class="container-fluid float-left " style="width: 20rem;margin-top: 3rem;margin-left:3 rem;position:fixed;">
+            <h3 class="text-break h3 text-center text-white font-weight-lighter"><?php echo $data[7][0]['strFilmTitle'] ?></h3>
             <img src="../pictures/poster/<?php echo ($pic);?>" class="border border-white img-fluid  rounded-lg" alt="">
         </div>
 
@@ -128,22 +129,13 @@ mysqli_close($conn);
               </table>
             </div>
           <div class="container-fluid float-right" style="width: 20rem;margin-top: 3rem;color:white;">
-          <h3>Certificate  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalCert">
+          <h3>Certificate<button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalCert">
             <img src="../pictures\icons\cog-wheel-silhouette.png" alt="" width="20px"></button></h3>
               <table class="table table-dark table-hover">
                 <tbody style="color:white;">
-                  <?php $temp = array();
-                     foreach ($data[0] AS $row)
-                     {
-                       array_push($temp,$row['strCertificate']);
-                     } 
-                     $cert = array_unique($temp,SORT_REGULAR);
-                     foreach ($cert AS $element){ ?>
                         <tr>
-                          <td class="text-center"><?php echo $element; ?></td>
+                          <td class="text-center"><?php echo $data[7][0]['strCertificate']; ?></td>
                         </tr>
-                     <?php }
-                  ?>
                 </tbody>
               </table>
           </div>
@@ -152,18 +144,9 @@ mysqli_close($conn);
             <img src="../pictures\icons\cog-wheel-silhouette.png" alt="" width="20px"></button></h3>
               <table class="table table-dark table-hover">
                 <tbody style="color:white;">
-                  <?php $genreTemp = array();
-                     foreach ($data[0] AS $row)
-                     {
-                       array_push($genreTemp,$row['strGenre']);
-                     } 
-                     $genre = array_unique($genreTemp,SORT_REGULAR);
-                     foreach ($genre AS $gen){ ?>
                         <tr>
-                          <td class="text-center"><?php echo $gen; ?></td>
+                          <td class="text-center"><?php echo $data[7][0]['strGenre']; ?></td>
                         </tr>
-                     <?php }
-                  ?>
                 </tbody>
               </table>
           </div>

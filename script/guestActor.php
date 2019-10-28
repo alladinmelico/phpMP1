@@ -8,9 +8,21 @@ $pic = $_GET['actorPicture'];
 require('includes/config.php');
 
 
-$sql = "CALL viewActor($lngActorID);";
-$result = mysqli_query($conn,$sql);
-$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
+$data = array();
+$sql = "CALL selectActor('$lngActorID');";
+$sql .= "SELECT lngFilmTitleID,strFilmTitle FROM tblFilmTitles;";
+$sql .= "SELECT * FROM tblroletypes;";
+$sql .= "SELECT * FROM tblActors WHERE lngActorID = $lngActorID;";
+
+
+if (mysqli_multi_query($conn,$sql)){
+  do{
+     if ($result=mysqli_store_result($conn)){
+        $data[] = mysqli_fetch_all($result,MYSQLI_ASSOC);
+     }
+  }while (mysqli_next_result($conn));
+}
+
 mysqli_close($conn);
 ?>
 <body>
@@ -60,7 +72,7 @@ mysqli_close($conn);
 
     <div class="content font-weight-light">
         <div class="container-fluid float-left " style="width: 20rem;margin-top: 3rem;margin-left:3 rem;position:fixed;">
-        <h1 class="text-white h1 text-center"><?php echo $data[0]['strActorFullName']?></h1>
+        <h1 class="text-white h1 text-center"><?php echo $data[3][0]['strActorFullName']?></h1>
             <img src="../pictures/profile/<?php echo $pic;?>" class="img-fluid" alt="">
         </div>
 
@@ -81,7 +93,7 @@ mysqli_close($conn);
           <tbody>
        
           <?php
-            foreach ($data AS $row)
+            foreach ($data[0] AS $row)
             { ?> 
               <tr style="color:white;" class="showTrashRow">
                 <td  class="text-center"> <img src="../pictures/poster/<?php echo $row['filmPicture'];?>" alt="" width="80px"></td>
@@ -108,7 +120,7 @@ mysqli_close($conn);
             <tbody>
               <?php
               $story = "";
-              foreach ($data AS $row)
+              foreach ($data[3] AS $row)
               {
                 $story = $row['memActorNotes'];
               } ?>

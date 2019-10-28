@@ -6,7 +6,7 @@ $db_host = "localhost";
 $db_username = "";
 $db_password = "";
 $db_name = "db_mp1";
-
+$_SESSION['db_name'] = "db_mp1";
 if (isset($_SESSION["userName"]) AND isset($_SESSION['userPassword']) AND isset($_SESSION['db_name']))
 {
     $db_username = $_SESSION['userName'];
@@ -17,6 +17,7 @@ if (isset($_SESSION["userName"]) AND isset($_SESSION['userPassword']) AND isset(
         $db_username = "filmGuest";
         $db_password = "password";
         $db_name = "db_mp1";
+        $_SESSION['db_name'] = "db_mp1";
     }
 $conn = mysqli_connect($db_host,$db_username,$db_password) or die ("Could not connect!\n");
 

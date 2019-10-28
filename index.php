@@ -138,7 +138,7 @@ while ($row = mysqli_fetch_array($result))
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title font-weight-bold text-center mb-5"><?php echo $row['strFilmTitle'] ?>
-                  <a href="script/viewFilm.php?lngFilmTitleID=<?php echo ($row['lngFilmTitleID']);?>&filmPic=<?php echo $row['picture']; ?>"
+                  <a href="script/guestFilm.php?lngFilmTitleID=<?php echo ($row['lngFilmTitleID']);?>&filmPic=<?php echo $row['picture']; ?>"
                      class="float-right "><img src="pictures\icons\arrow-pointing-right-in-a-circle.png" alt="" width=50 class="rounded-circle shadow p-2"></a></h5>
                 <p class="card-text"><strong>Cast: </strong><?php echo $row['actors']?></p>
                 <p class="card-text"><strong>Genre:</strong><?php echo $row['genre']?></p>
@@ -179,21 +179,6 @@ while ($row = mysqli_fetch_array($result))
     mysqli_free_result($result);
     mysqli_close( $conn );
 ?>
-
-<div class="position-relative w-100 d-flex flex-column p-4">
-    <div class="toast ml-auto" role="alert" data-delay="100" data-autohide="false">
-        <div class="toast-header">
-            <strong class="mr-auto text-primary">Toast</strong>
-            <small class="text-muted">3 mins ago</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            This is a simple toast, not working...
-        </div>
-    </div>
-</div
 
 </body>
 </html>

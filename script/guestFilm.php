@@ -7,9 +7,21 @@ $lngFilmTitleID = $_GET['lngFilmTitleID'];
 $pic = $_GET['filmPic'];
 require('includes/config.php');
 
-$sql = "CALL viewSelectedFilm($lngFilmTitleID);";
-$result = mysqli_query($conn,$sql);
-$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
+$data = array();
+$sql = "CALL selectFilm('$lngFilmTitleID');";
+$sql .= "SELECT prod.lngProducerID, prod.strProducerName, ftp.lngFilmTitleID FROM tblProducers prod LEFT JOIN tblfilmtitlesproducers ftp ON ftp.lngProducerID = prod.lngProducerID 
+          GROUP BY prod.lngProducerID HAVING (ftp.lngFilmTitleID <> '$lngFilmTitleID') OR (ftp.lngFilmTitleID IS NULL);";
+$sql .= "CALL selectFilmProducers('$lngFilmTitleID');";
+$sql .= "call getFilmCertGenre('$lngFilmTitleID')";
+
+
+if (mysqli_multi_query($conn,$sql)){
+  do{
+     if ($result=mysqli_store_result($conn)){
+        $data[] = mysqli_fetch_all($result,MYSQLI_ASSOC);
+     }
+  }while (mysqli_next_result($conn));
+}
 mysqli_close($conn);
 
 ?>
@@ -62,7 +74,7 @@ mysqli_close($conn);
 
     <div class="content font-weight-light">
         <div class="container-fluid float-left " style="width: 20rem;margin-top: 3rem;margin-left:3 rem;position:fixed;">
-        <h1 class="text-white h1 text-center"><?php echo $data[0]['strFilmTitle']?></h1>
+        <h1 class="text-white h1 text-center"><?php echo $data[0][0]['strFilmTitle']?></h1>
             <img src="../pictures/poster/<?php echo ($pic);?>" class="border border-white img-fluid  rounded-lg" alt="">
         </div>
 
@@ -72,7 +84,7 @@ mysqli_close($conn);
               <table class="table table-dark table-hover">
                 <tbody style="color:white;">
                   <?php $temp = array();
-                     foreach ($data AS $row)
+                     foreach ($data[2] AS $row)
                      {
                        array_push($temp,$row['strProducerName']);
                      } 
@@ -102,7 +114,7 @@ mysqli_close($conn);
               <table class="table table-dark table-hover">
                 <tbody style="color:white;">
                   <?php $temp = array();
-                     foreach ($data AS $row)
+                     foreach ($data[3] AS $row)
                      {
                        array_push($temp,$row['strCertificate']);
                      } 
@@ -121,7 +133,7 @@ mysqli_close($conn);
               <table class="table table-dark table-hover">
                 <tbody style="color:white;">
                   <?php $genreTemp = array();
-                     foreach ($data AS $row)
+                     foreach ($data[3] AS $row)
                      {
                        array_push($genreTemp,$row['strGenre']);
                      } 
@@ -150,7 +162,7 @@ mysqli_close($conn);
           </thead>
           <tbody>
             <?php
-            foreach ($data AS $row)
+            foreach ($data[0] AS $row)
             { ?>
               <tr style="color:white;" class="showTrashRow">
                 <td  class="text-center"> <img src="../pictures/profile/<?php echo $row['actPic'];?>" alt="" width="80px"></td>
@@ -173,7 +185,7 @@ mysqli_close($conn);
             <tbody>
               <?php
               $story = "";
-              foreach ($data AS $row)
+              foreach ($data[0] AS $row)
               {
                 $story = $row['memFilmStory'];
               } ?>

@@ -3,15 +3,17 @@ include('includes/navigation.php');?>
 <body>
 <?php 
     // DONE TODO: Add pictures to CRUD
+    $_SESSION['db_name'] = "db_mp1";
     include ('includes/config.php');
     include ('includes/search.php');
     if (isset($_GET['search']))
     {
     $search = $_GET['search'];
-    $result = mysqli_query( $conn,"SELECT * FROM tblFilmTitles film INNER JOIN tblFilmGenres genre
-        on film.lngGenreID = genre.lngGenreID INNER JOIN tblFilmCertificates certi on certi.lngCertificateID = film.lngCertificateID
-             WHERE film.strFilmTitle LIKE '%". $search."%';" );
-    $num_rows = mysqli_num_rows( $result ); ?>
+    $sql = "SELECT * FROM tblFilmTitles film INNER JOIN tblFilmGenres genre
+    on film.lngGenreID = genre.lngGenreID INNER JOIN tblFilmCertificates certi on certi.lngCertificateID = film.lngCertificateID
+         WHERE film.strFilmTitle LIKE '%". $search."%';";
+
+$result = mysqli_query( $conn, $sql);?>
     <br>
     <div class="bs-example">
     <table width=375 class="table table-hover ">
