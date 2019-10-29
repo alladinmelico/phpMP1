@@ -12,7 +12,7 @@ include('includes/navigation.php');?>
     $num_rows = mysqli_num_rows( $result ); ?>
     <br>
     <div class="bs-example">
-    <table width=375 class="table table-hover ">
+    <table width=375 class="table table-hover" >
         <thead style=" background: #11998e;
                 background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
                 background: linear-gradient(to right, #11998e, #38ef7d);">

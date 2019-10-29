@@ -1,8 +1,14 @@
 <?php
+$placeHolder = "Search";
 if (isset($_GET['search'])){
     $searchInput = $_GET['search'];
+    $placeHolder = $_GET['search'];
+    if ($searchInput == ""){
+      $placeHolder = "Search";
+    }
 } else {
     $searchInput = "";
+    $placeHolder = "Search";
 }
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: #11998e;
@@ -17,7 +23,7 @@ if (isset($_GET['search'])){
 
       <form action="globalSearch.php" style="width:20rem;" class="form-inline">
         <div class="input-group mt-3">
-          <input type="search" placeholder="Search" name="search" value="" class="form-control">
+          <input type="search" placeholder="<?php echo $placeHolder;?>" name="search" value="" class="form-control">
           <div class="input-group-append">
             <input type="submit" value="SEARCH"  class="btn btn-outline-dark form-control" >
           </div>

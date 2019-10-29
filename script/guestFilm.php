@@ -69,12 +69,10 @@ mysqli_close($conn);
 .showTrashRow:hover .showTrash {
   display: block;
 }
-
 </style>
-
     <div class="content font-weight-light">
         <div class="container-fluid float-left " style="width: 20rem;margin-top: 3rem;margin-left:3 rem;position:fixed;">
-        <h1 class="text-white h1 text-center"><?php echo $data[0][0]['strFilmTitle']?></h1>
+        <h1 class="text-white h1 text-center"><?php echo $data[3][0]['strFilmTitle']?></h1>
             <img src="../pictures/poster/<?php echo ($pic);?>" class="border border-white img-fluid  rounded-lg" alt="">
         </div>
 
@@ -84,7 +82,7 @@ mysqli_close($conn);
               <table class="table table-dark table-hover">
                 <tbody style="color:white;">
                   <?php $temp = array();
-                     foreach ($data[2] AS $row)
+                     foreach ($data[1] AS $row)
                      {
                        array_push($temp,$row['strProducerName']);
                      } 
@@ -185,7 +183,7 @@ mysqli_close($conn);
             <tbody>
               <?php
               $story = "";
-              foreach ($data[0] AS $row)
+              foreach ($data[3] AS $row)
               {
                 $story = $row['memFilmStory'];
               } ?>
