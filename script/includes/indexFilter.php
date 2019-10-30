@@ -35,7 +35,7 @@ if ((isset($_GET['dtmBegin'])) AND isset($_GET['dtmEnd']) AND isset($_GET['searc
                             todayHighlight: true
                         });
                     </script>
-                    <div class="input-daterange input-group" id="datepicker" data-provide="datepicker">
+                    <div class="input-daterange input-group" id="sandbox-container" data-provide="datepicker">
                         <input type="text" class="input-sm form-control" name="dtmBegin" value="<?php echo $dtmBeginValue?>" required/>
                         <span class="bg-info font-weight-bold pr-3 pl-3"> TO </span>
                         <input type="text" class="input-sm form-control" name="dtmEnd" value="<?php echo $dtmEndValue?>" required/>

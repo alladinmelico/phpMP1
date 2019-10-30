@@ -1,9 +1,17 @@
 <?php 
 include('header.php');
+session_start();
 $_SESSION['db_name'] = "mysql";
-require('includes/config.php');
+
 //DONE: directing to login
-if (isset($_SESSION['userName']) AND isset($_SESSION['userPassword'])){
+
+if (isset($_SESSION['userName']) AND isset($_SESSION['userPassword']) AND (!isset($_SESSION['isAdmin']))){
+  
+    $conn = mysqli_connect("localhost",$_SESSION['userName'],$_SESSION['userPassword']) or die ("Could not connect!\n");
+
+    mysqli_select_db($conn,"mysql") or die ("Could not select the Database mysql!\n".mysqli_error());
+
+
     $userName = mysqli_real_escape_string($conn,$_SESSION['userName']);
     $userPassword = mysqli_real_escape_string($conn,$_SESSION['userPassword']);
     
@@ -11,19 +19,24 @@ if (isset($_SESSION['userName']) AND isset($_SESSION['userPassword'])){
         header("location: login.php");
     } else
         {
+          $_SESSION['db_name'] = "mysql";
             $sql = "SELECT * FROM USER ur
             WHERE ur.user = '$userName' AND ur.Password = PASSWORD('$userPassword')";
+
 
             $result = mysqli_query($conn,$sql);
             $row = mysqli_fetch_array($result);
 
-            echo $sql;
-            echo $_SESSION['db_name'];
+            // echo $sql;
+            // echo $_SESSION['db_name'];
 
             $_SESSION['db_name'] = "db_mp1";
 
             if(($row[0] == NULL)){
                 header("location: login.php");
+                echo "no match";
+            } else {
+              $_SESSION['isAdmin'] = true;
             }
         }
 } 
@@ -97,8 +110,10 @@ if (($_SERVER["REQUEST_METHOD"] == "GET") AND isset($_GET['searchInput']))
 $date = date('Y-m-d');
 $newdate = strtotime ( '-10 year' , strtotime ( $date ) ) ;
 $newdate = date ( 'Y-m-d' , $newdate );
+$advDate = strtotime ( '+10 year' , strtotime ( $date ) ) ;
+$advDate = date ( 'Y-m-d' , $advDate );
 
-$sql = "call getAllFilms('$newdate','$date','$strSearch');";
+$sql = "call getAllFilms('$newdate','$advDate','$strSearch');";
 $result = mysqli_query( $conn,$sql);
 
 while ($row = mysqli_fetch_array($result))

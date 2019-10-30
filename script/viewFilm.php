@@ -134,7 +134,7 @@ mysqli_close($conn);
               <table class="table table-dark table-hover">
                 <tbody style="color:white;">
                         <tr>
-                          <td class="text-center"><?php echo $data[7][0]['strCertificate']; ?></td>
+                          <td class="text-center"><?php echo $data[0][0]['strCertificate']; ?></td>
                         </tr>
                 </tbody>
               </table>
@@ -145,7 +145,7 @@ mysqli_close($conn);
               <table class="table table-dark table-hover">
                 <tbody style="color:white;">
                         <tr>
-                          <td class="text-center"><?php echo $data[7][0]['strGenre']; ?></td>
+                          <td class="text-center"><?php echo $data[0][0]['strGenre']; ?></td>
                         </tr>
                 </tbody>
               </table>

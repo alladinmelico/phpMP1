@@ -125,6 +125,7 @@ if (($_SERVER["REQUEST_METHOD"] == "GET") AND isset($_GET['searchInput']))
 }
 $sql = "call getAllFilms('$dtmBegin','$dtmEnd','$strSearch');";
 $result = mysqli_query( $conn,$sql);
+
 while ($row = mysqli_fetch_array($result))
 {?>
     <tr style="color:white;" ">

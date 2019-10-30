@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     
     $result = mysqli_query( $conn,$sql);
 
-    if ($result AND isset($_POST['viewActor'])) {
+    if ($result AND isset($_GET['viewActor'])) {
         header("location: viewActor.php?lngActorId=$lngActorID&actorPicture=$pic");
     } else 
     {
@@ -60,6 +60,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST['submit']) == "ADD")
     
     $result = mysqli_query( $conn,$sql);
 
+    echo $_POST['viewActor'];
     if ($result AND isset($_POST['viewActor'])) {
         header("location: viewActor.php?lngActorId=$lngActorID&actorPicture=$pic");
     } else 

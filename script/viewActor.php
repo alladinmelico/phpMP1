@@ -240,7 +240,7 @@ if (isset($_GET['lngRoleTypeID']))
               <form action="addActor.php" method="POST">
                     <input type="hidden" name="pic" value="<?php echo $pic; ?>">
                     <input type="hidden" name="lngActorID" value="<?php echo $lngActorID?>">
-                    <input type="hidden" name="viewActor" value = "true ">
+                    <input type = "hidden" name="viewActor" value="true"> 
                     <label>Film</label>
                     <select class="custom-select" name="lngFilmTitleID" required>
                     <option name="lngFilmTitleID" value="<?php echo $lngFilmTitleID?>" required><?php echo $strFilmTitle;?></option>;

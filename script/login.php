@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
 
   // TODO: cookies
 
-  if($_SESSION['userName']){
+  if($_SESSION['userName'] AND $_SESSION['userPassword']){
     header("location: dashboard.php");
   }
 } else{

@@ -1,4 +1,9 @@
-
+<?php
+if (!(isset($_SESSION['isAdmin'])))
+{
+  // header("location: login.php");
+}
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: #11998e;
                 background: -webkit-linear-gradient(to right, #11998e, #38ef7d);
                 background: linear-gradient(to right, #11998e, #38ef7d);color:white;font-size:2em;">
