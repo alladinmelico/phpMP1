@@ -123,9 +123,9 @@ if (($_SERVER["REQUEST_METHOD"] == "GET") AND isset($_GET['searchInput']))
     $dtmBegin = date("Y-m-d");
     $dtmEnd = date("Y-m-d");
 }
-$sql = "call getAllFilms('$dtmBegin','$dtmEnd','$strSearch');";
+$sql = "SELECT * FROM viewallFilm WHERE (dtmFilmReleaseDate BETWEEN '$dtmBegin' AND '$dtmEnd')
+AND strFilmTitle LIKE '%$strSearch%';";
 $result = mysqli_query( $conn,$sql);
-
 while ($row = mysqli_fetch_array($result))
 {?>
     <tr style="color:white;" ">

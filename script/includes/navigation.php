@@ -1,7 +1,14 @@
 <?php
+if (!isset($_SESSION))
+{
+  session_start();
+}
+
 if (!(isset($_SESSION['isAdmin'])))
 {
-  // header("location: login.php");
+  header("location: login.php");
+} else if ($_SESSION['isAdmin'] == false) {
+  header("location: login.php");
 }
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background: #11998e;

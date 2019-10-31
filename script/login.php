@@ -3,11 +3,11 @@ include('header.php');
 
 session_start();
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
-  include('includes/config.php');
   $_SESSION['userName'] = $_POST['userName'];
   $_SESSION['userPassword'] = $_POST['userPassword'];
   $_SESSION['db_name'] = "mysql";
-
+  include('includes/config.php');
+  
   // TODO: cookies
 
   if($_SESSION['userName'] AND $_SESSION['userPassword']){

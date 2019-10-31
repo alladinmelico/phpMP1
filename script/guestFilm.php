@@ -8,11 +8,11 @@ $pic = $_GET['filmPic'];
 require('includes/config.php');
 
 $data = array();
-$sql = "CALL selectFilm('$lngFilmTitleID');";
+$sql = "SELECT * FROM viewSelectFilm WHERE lngFilmTitleID = '$lngFilmTitleID';";
 $sql .= "SELECT prod.lngProducerID, prod.strProducerName, ftp.lngFilmTitleID FROM tblProducers prod LEFT JOIN tblfilmtitlesproducers ftp ON ftp.lngProducerID = prod.lngProducerID 
           GROUP BY prod.lngProducerID HAVING (ftp.lngFilmTitleID <> '$lngFilmTitleID') OR (ftp.lngFilmTitleID IS NULL);";
-$sql .= "CALL selectFilmProducers('$lngFilmTitleID');";
-$sql .= "call getFilmCertGenre('$lngFilmTitleID')";
+$sql .= "SELECT * FROM  viewSelectFilmProducers WHERE lngFilmTitleID = '$lngFilmTitleID';";
+$sql .= "SELECT * FROM  viewFilmCertGenre WHERE lngFilmTitleID = '$lngFilmTitleID'";
 
 
 if (mysqli_multi_query($conn,$sql)){

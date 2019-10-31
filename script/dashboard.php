@@ -34,6 +34,7 @@ if (isset($_SESSION['userName']) AND isset($_SESSION['userPassword']) AND (!isse
 
             if(($row[0] == NULL)){
                 header("location: login.php");
+                $_SESSION['isAdmin'] = false;
                 echo "no match";
             } else {
               $_SESSION['isAdmin'] = true;
@@ -116,6 +117,9 @@ $advDate = date ( 'Y-m-d' , $advDate );
 $sql = "call getAllFilms('$newdate','$advDate','$strSearch');";
 $result = mysqli_query( $conn,$sql);
 
+// echo $sql;
+// echo $_SESSION['userName'];
+// echo $_SESSION['userPassword'];
 while ($row = mysqli_fetch_array($result))
 {?>
     <tr style="color:white;" ">

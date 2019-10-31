@@ -9,7 +9,7 @@ require('includes/config.php');
 
 
 $data = array();
-$sql = "CALL selectActor('$lngActorID');";
+$sql = "SELECT * FROM viewSelectActor WHERE lngActorID = '$lngActorID';";
 $sql .= "SELECT lngFilmTitleID,strFilmTitle FROM tblFilmTitles;";
 $sql .= "SELECT * FROM tblroletypes;";
 $sql .= "SELECT * FROM tblActors WHERE lngActorID = $lngActorID;";

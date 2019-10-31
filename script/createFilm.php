@@ -140,7 +140,7 @@ if (isset($_GET['lngFilmTitleID']))
                     INNER JOIN tblFilmTitles ft ON ft.lngGenreID = fg.lngGenreID");
                 $rowDefaultCategory = mysqli_fetch_assoc($resultDefaultCat)?>
 
-                <select class="custom-select" name="lngGenreID" value="<?php echo $row[6];?>" required> ";
+                <select class="custom-select" name="lngGenreID" value="<?php echo $row[6];?>" required> 
                 <option name="strGenre" value="" required>Choose...</option>;
                 
                 <?php
